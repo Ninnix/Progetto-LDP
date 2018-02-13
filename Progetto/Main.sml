@@ -135,7 +135,8 @@ fun evalM(m:M, E:varloc list, S:locval list) : value =
     |appl(m1,m2) => case evalM(m1,E,S) of
                     closure(v,m3,env,sto) =>  evalM(m3,( (ref v), (ref [newloc ()]) )::env,( !currentloc ,evalM(m2,E,S))::sto)
                     |    _      =>  raise Fail "expected fun as first parameter";
-                    
+
+(*Dichiarazione tipi di dato dei programmi*)                    
 datatype p = skip | conc of p*p | myif of M*p*p | mywhile of M*p | mylet of var*M*p |assign of var*M 
              | intVector of var*(M list)*p | boolVector of var*(M list)*p | pushVector of var*M | popVector of var
              | clone of var*var | stampaEnv | stampaStore;
